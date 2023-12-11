@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0qjcsypb7emr"]
+
+[ext_resource type="Shader" path="res://world.gdshader" id="1_vrsle"]
+[ext_resource type="Texture2D" uid="uid://cdl18g0k4l2fn" path="res://white.png" id="2_fovhy"]
+[ext_resource type="Texture2D" uid="uid://cpdrcpioha76w" path="res://height.tres" id="2_h52cg"]
+[ext_resource type="Script" path="res://World.gd" id="4_2biqo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wq7k"]
+resource_local_to_scene = true
+shader = ExtResource("1_vrsle")
+shader_parameter/shadow = true
+shader_parameter/sunPos = null
+shader_parameter/height = ExtResource("2_h52cg")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="World" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0wq7k")
+texture = ExtResource("2_fovhy")
+centered = false
+script = ExtResource("4_2biqo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_bottom = 51.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+
+[node name="ZoomIn" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "+"
+
+[node name="ZoomOut" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "-"
+
+[connection signal="button_down" from="CanvasLayer/Control/MarginContainer/HBoxContainer/ZoomIn" to="World" method="_on_zoom_in_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/MarginContainer/HBoxContainer/ZoomOut" to="World" method="_on_zoom_out_button_down"]

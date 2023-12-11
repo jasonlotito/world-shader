@@ -1,0 +1,10 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://cpdrcpioha76w"]
+
+[ext_resource type="FastNoiseLite" uid="uid://cehu06wiyrdju" path="res://height-noise.tres" id="1_utarh"]
+
+[resource]
+resource_local_to_scene = true
+width = 1920
+height = 1024
+seamless = true
+noise = ExtResource("1_utarh")
